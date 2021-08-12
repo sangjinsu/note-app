@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jinsuSang/note-app#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "validator": "^13.6.0"
   }
 }
