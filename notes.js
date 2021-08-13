@@ -1,5 +1,11 @@
+const fs = require('fs')
+
 const getNotes = function () {
-  return 'Your notes...'
+  fs.readFileSync('notes.txt')
+}
+
+const writeNotes = function (msg) {
+  fs.appendFileSync('notes.txt', `${msg}\n`)
 }
 
 // TypeError: Assignment to constant variable.
@@ -7,6 +13,4 @@ const getNotes = function () {
 //   console.log('it is not working')
 // }
 
-console.log(getNotes.toString())
-
-module.exports = getNotes
+module.exports = { getNotes, writeNotes }
