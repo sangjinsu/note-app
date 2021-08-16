@@ -46,6 +46,22 @@ const listNotes = () => {
   }
 }
 
+const readNote = (title) => {
+  const notes = loadNotes()
+  const note = notes.find((n) => n.title === title)
+
+  if (note) {
+    const body = note.body
+
+    console.log(`title: ${note.title}`)
+    for (let i = 0; i < body.length; i++) {
+      console.log(body[i])
+    }
+  } else {
+    console.log(chalk.red.inverse('Note not found'))
+  }
+}
+
 const saveNotes = (notes) => {
   const data = JSON.stringify(notes)
   fs.writeFile('notes.json', data, (err) => {
@@ -71,4 +87,4 @@ const loadNotes = () => {
 //   console.log('it is not working')
 // }
 
-module.exports = { addNote, removeNote, listNotes }
+module.exports = { addNote, removeNote, listNotes, readNote }
