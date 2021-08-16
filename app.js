@@ -1,6 +1,7 @@
 'use strict'
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
+const { addNote } = require('./notes')
 
 yargs(hideBin(process.argv))
   .command(
@@ -10,6 +11,8 @@ yargs(hideBin(process.argv))
     (argv) => {
       console.log(`Add a note with the title "${argv.title}"...`)
       console.log(`What is written is below.\n"${argv.body}"`)
+
+      addNote(argv.title, argv.body)
     }
   )
   .demandOption(['title', 'body'])

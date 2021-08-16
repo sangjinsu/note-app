@@ -1,2 +1,0 @@
-This file was created by Node.js
-My name is jinsu
