@@ -1,7 +1,7 @@
 'use strict'
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
-const { addNote, removeNote } = require('./notes')
+const { addNote, removeNote, listNotes } = require('./notes')
 
 const titleOption = {
   alias: 't',
@@ -51,6 +51,7 @@ yargs(hideBin(process.argv))
     () => {},
     () => {
       console.log(`List notes...`)
+      listNotes()
     }
   )
   .command(

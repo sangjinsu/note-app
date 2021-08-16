@@ -1,21 +1,20 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-const readNotes = function () {
-  fs.readFileSync('notes.txt')
-}
-
 const addNote = (title, body) => {
   const notes = loadNotes()
-  const newNotes = notes.filter((n) => n.title === title)
+  const note = notes.filter((n) => n.title === title)
 
-  if (newNotes.length === 0) {
-    newNotes.push({ title, body })
-    saveNotes(newNotes)
+  if (note.length === 0) {
+    notes.push({ title, body: [body] })
     console.log(chalk.green('New note added'))
   } else {
     console.log(chalk.yellow('Note title already existed'))
+    note[0].body.push(body)
+    console.log(chalk.yello('body added'))
   }
+
+  saveNotes(notes)
 }
 
 const removeNote = (title) => {
@@ -27,6 +26,23 @@ const removeNote = (title) => {
     console.log(chalk.green('Note removed'))
   } else {
     console.log(chalk.red.inverse('Note not found'))
+  }
+}
+
+const listNotes = () => {
+  const notes = loadNotes()
+
+  if (notes.length > 0) {
+    console.log(chalk.greenBright('Your notes'))
+    for (let i = 0; i < notes.length; i++) {
+      console.log(`title: ${notes[i].title}`)
+
+      for (let j = 0; j < notes[i].body.length; j++) {
+        console.log(notes[i].body[j])
+      }
+    }
+  } else {
+    console.log(chalk.yellow('Notes are empty'))
   }
 }
 
@@ -55,4 +71,4 @@ const loadNotes = () => {
 //   console.log('it is not working')
 // }
 
-module.exports = { readNotes, addNote, removeNote }
+module.exports = { addNote, removeNote, listNotes }
