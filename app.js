@@ -1,3 +1,4 @@
+'use strict'
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const { addNote, removeNote, listNotes, readNote } = require('./notes')
