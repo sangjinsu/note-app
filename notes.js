@@ -3,15 +3,15 @@ const chalk = require('chalk')
 
 const addNote = (title, body) => {
   const notes = loadNotes()
-  const note = notes.filter((n) => n.title === title)
+  const note = notes.find((n) => n.title === title)
 
-  if (note.length === 0) {
+  if (!note) {
     notes.push({ title, body: [body] })
     console.log(chalk.green('New note added'))
   } else {
     console.log(chalk.yellow('Note title already existed'))
-    note[0].body.push(body)
-    console.log(chalk.yello('body added'))
+    note.body.push(body)
+    console.log(chalk.yellow('body added'))
   }
 
   saveNotes(notes)
@@ -63,13 +63,18 @@ const readNote = (title) => {
 }
 
 const saveNotes = (notes) => {
-  const data = JSON.stringify(notes)
-  fs.writeFile('notes.json', data, (err) => {
-    if (err) {
-      console.error(chalk.red.inverse(err.message))
-    }
-    console.log(chalk.green.inverse('The file has been saved!'))
-  })
+  try {
+    const data = JSON.stringify(notes)
+    fs.writeFile('notes.json', data, (err) => {
+      if (err) {
+        console.error(chalk.red.inverse(err.message))
+        throw err
+      }
+      console.log(chalk.green.inverse('The file has been saved!'))
+    })
+  } catch (error) {
+    console.error(chalk.red.inverse(error.message))
+  }
 }
 
 const loadNotes = () => {
