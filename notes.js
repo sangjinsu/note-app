@@ -2,6 +2,11 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
+/**
+ *
+ * @param {string} title
+ * @param {string} body
+ */
 const addNote = (title, body) => {
   const notes = loadNotes()
   const note = notes.find((n) => n.title === title)
@@ -18,6 +23,10 @@ const addNote = (title, body) => {
   saveNotes(notes)
 }
 
+/**
+ *
+ * @param {string} title
+ */
 const removeNote = (title) => {
   const notes = loadNotes()
   const newNotes = notes.filter((n) => n.title !== title)
@@ -47,6 +56,10 @@ const listNotes = () => {
   }
 }
 
+/**
+ *
+ * @param {string} title
+ */
 const readNote = (title) => {
   const notes = loadNotes()
   const note = notes.find((n) => n.title === title)
@@ -63,6 +76,17 @@ const readNote = (title) => {
   }
 }
 
+/**
+ *
+ * @typeof {object} note
+ * @property {string} title
+ * @property {string[]} body
+ */
+
+/**
+ *
+ * @param {note[]} notes
+ */
 const saveNotes = (notes) => {
   try {
     const data = JSON.stringify(notes)
